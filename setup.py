@@ -468,9 +468,13 @@ def main():
             if LINUX:
                 if which('dpkg'):
                     missdeps("sudo apt-get install gcc python%s-dev" % py3)
-                elif which('rpm'):
+                elif which('yum'):
                     missdeps("sudo yum install gcc python%s-devel" % py3)
-                elif which('apk'):
+                elif which('dnf'):  # fedora
+                    missdeps("sudo dnf install gcc python%s-devel" % py3)
+                elif which('zypper'):  # opensuse
+                    missdeps("sudo zypper in gcc python%s-devel" % py3)
+                elif which('apk'):  # alpine
                     missdeps("sudo apk add gcc python%s-dev" % py3)
             elif MACOS:
                 print(hilite("XCode (https://developer.apple.com/xcode/) "
