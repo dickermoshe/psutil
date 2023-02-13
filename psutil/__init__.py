@@ -1134,10 +1134,12 @@ class Process(object):
                 nt = _psplatform.pmmap_ext
                 return [nt(*x) for x in it]
 
-    def open_files(self):
+    def open_files(self, skip=False):
         """Return files opened by process as a list of
         (path, fd) namedtuples including the absolute file name
         and file descriptor number.
+        Setting the *skip* parameter to True will skip files that
+        would otherwise raise `PermissionError` exceptions.
         """
         return self._proc.open_files()
 
